@@ -1,0 +1,22 @@
+﻿@model List<Category>
+
+<h1 class="my-4">Category List</h1>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Category Name</th>
+            <th>Display Order</th>
+        </tr>
+    </thead>
+    <tbody>
+        @* Displaying the categories ordered by DisplayOrder using OrderBy() *@
+        @foreach (Category category in Model.OrderBy(c => c.DisplayOrder))
+        {
+            <tr>
+                <td>@category.Name</td>
+                <td>@category.DisplayOrder</td>
+            </tr>
+        }
+    </tbody>
+</table>
