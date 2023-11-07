@@ -16,3 +16,5 @@ WHY .NETCORE EVEN IF WE HAVE WEBFORMS AND .NET MVC?
 4. Easy Updates: Even though .Net core updates each year it's easy to switch to newer version from older.
 5. Cloud Friendly: In this cloud dependency ERA, .net apps supports to work and run in clouds too.
 6. Performance: Each updates carries better performance then older versions.
+
+[To Refer more go to this docs in this solutions Notes folder.]
