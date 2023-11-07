@@ -5,6 +5,7 @@ VisualStudioVersion = 17.7.34221.43
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Notes", "Notes", "{4D69C736-A6CD-46BC-B806-2D9682CCA937}"
 	ProjectSection(SolutionItems) = preProject
+		Dependency Injection.txt = Dependency Injection.txt
 		DotNet Roadmap.txt = DotNet Roadmap.txt
 		C:\Users\gjset\Downloads\course_9\.NET 8 NEW Course\Information.pptx = C:\Users\gjset\Downloads\course_9\.NET 8 NEW Course\Information.pptx
 	EndProjectSection

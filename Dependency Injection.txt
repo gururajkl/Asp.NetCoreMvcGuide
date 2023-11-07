@@ -1,0 +1,41 @@
+* DI is a software design pattern used in OOPS.
+
+* It is a technique that promotes the decoupling of components in a system by allowing dependent objects 
+to be provided with their dependencies rather than creating those dependencies themselves.
+
+--------------------------------------------------------
+
+BENIFITS OF DI:
+1. Decoupling: Dependency Injection reduces the coupling between components, making it easier to replace 
+or change individual parts of a system without affecting other parts.
+
+2. Testability: It simplifies unit testing by allowing you to provide mock or fake
+dependencies when testing a component, ensuring that the tests are isolated and predictable.
+
+3. Flexibility: You can change the behavior of a component by simply injecting a different 
+implementation of its dependency, without modifying the component's code.
+
+4. Reusability: Components with well-defined dependencies are more reusable in different contexts.
+
+5. Maintainability: Code that uses DI is often easier to understand and maintain 
+because the dependencies are clearly defined.
+
+---------------------------------------------------------
+
+DI IMPLEMENTATION WAYS:
+1. Constructor Injection: Dependencies are passed to a class through its constructor.
+
+2. Method Injection: Dependencies are provided through setter or method parameters.
+
+3. Property Injection: Dependencies are set through public properties of a class.
+
+4. Service Locator Pattern: A central service locator is used to locate and provide 
+dependencies to components.
+
+5. IoC (Inversion of Control) Containers: Specialized frameworks like Unity, Autofac, 
+or ASP.NET Core's built-in DI container manage the dependencies and injection automatically.
+
+-----------------------------------------------------------
+
+* If any class needs any other class instance we can use DI container to get the instance after 
+registering it.
