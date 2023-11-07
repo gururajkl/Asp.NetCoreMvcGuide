@@ -1,0 +1,18 @@
+* The first version of webistes are Webforms, this had it's own drawbacks
+
+* Due to the webform drawbacks, .net team created a new MVC acrchitectured webpages as .Net MVC that is
+built on the top of webform components.
+
+* Later to overcome some problems in old frameoworks and libraries, .net team came with new .Net core framework.
+
+* June 2016 - .Net Core 1.0 was released.
+
+* Now (2023 Nov) we have .Net Core 8.0
+
+WHY .NETCORE EVEN IF WE HAVE WEBFORMS AND .NET MVC?
+1. Fast and OpenSource: .Net core is too fast when we compare to older techs.
+2. Cross Platform: .Net core does not rely on iis or windows platforms like webforms.
+3. Build in Dependency Injection: .Net core supports this much needed feature.
+4. Easy Updates: Even though .Net core updates each year it's easy to switch to newer version from older.
+5. Cloud Friendly: In this cloud dependency ERA, .net apps supports to work and run in clouds too.
+6. Performance: Each updates carries better performance then older versions.
