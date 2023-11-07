@@ -14,6 +14,8 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+// Allows us to use the static files in wwroot folder
 app.UseStaticFiles();
 
 app.UseRouting();
