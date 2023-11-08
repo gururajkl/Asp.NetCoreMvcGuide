@@ -34,6 +34,9 @@ namespace BulkyWeb.Controllers
             {
                 db.Categories.Add(category);
                 db.SaveChanges();
+
+                // Using TempData to show the tost on the UI.
+                TempData["Success"] = "Category created successfully";
                 return RedirectToAction("Index", "Category");
             }
             return View();
@@ -63,9 +66,43 @@ namespace BulkyWeb.Controllers
             {
                 db.Categories.Update(category);
                 db.SaveChanges();
+                TempData["Success"] = "Category updated successfully";
                 return RedirectToAction("Index", "Category");
             }
             return View();
+        }
+
+        public IActionResult Delete(int? Id)
+        {
+            if (Id == null || Id == 0)
+            {
+                return NotFound();
+            }
+            else
+            {
+                Category? categoryFromDb = db.Categories.Find(Id);
+                if (categoryFromDb == null)
+                {
+                    return NotFound();
+                }
+                return View(categoryFromDb);
+            }
+        }
+
+        [HttpPost, ActionName("Delete")]
+        public IActionResult DeletePOST(int? Id)
+        {
+            Category? category = db.Categories.Find(Id);
+
+            if (category == null)
+            {
+                return NotFound();
+            }
+
+            db.Categories.Remove(category);
+            db.SaveChanges();
+            TempData["Success"] = "Category deleted successfully";
+            return RedirectToAction("Index");
         }
     }
 }

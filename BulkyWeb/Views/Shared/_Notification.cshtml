@@ -1,0 +1,9 @@
+﻿@* Using TempDate to show the Toast *@
+@if (TempData["Success"] != null)
+{
+    <h1>@TempData["Success"]</h1>
+}
+@if (TempData["Error"] != null)
+{
+    <h1>@TempData["Error"]</h1>
+}
