@@ -14,7 +14,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlSer
 ));
 
 // Registering the Custom Services.
-builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 var app = builder.Build();
 
