@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - BulkyWeb</title>
+    <title>@ViewData["Title"] - Bulky</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" href="~/BulkyWeb.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
@@ -14,7 +14,7 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-primary border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="Customer" asp-controller="Home" asp-action="Index">BulkyWeb</a>
+                <a class="navbar-brand" asp-area="Customer" asp-controller="Home" asp-action="Index">Bulky</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -32,7 +32,8 @@
                                 Content Management
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" asp-area="Admin" asp-controller="Category" asp-action="Index">Category</a>
+                                <a class="dropdown-item" asp-area="Admin" asp-controller="Category" asp-action="Index">Categories</a>
+                                <a class="dropdown-item" asp-area="Admin" asp-controller="Product" asp-action="Index">Products</a>
                                 <div class="dropdown-divider"></div>
                             </div>
                         </li>
@@ -41,7 +42,7 @@
             </div>
         </nav>
     </header>
-    <div class="container">
+    <div class="container" style="margin-bottom: 80px">
         <main role="main" class="pb-3">
             @* Using partial view to show the toast *@
             <partial name="_Notification" />
@@ -49,7 +50,7 @@
         </main>
     </div>
 
-    <footer class="border-top footer bg-primary text-white">
+    <footer class="border-top footer fixed-bottom bg-primary text-white">
         <div class="container text-lg-center">
             &copy; @DateTime.Now.ToString("yyyy") - Bulky
         </div>
