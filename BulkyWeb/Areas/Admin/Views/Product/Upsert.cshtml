@@ -7,13 +7,14 @@
     <div class="card-header bg-secondary bg-gradient ml-0 py-3">
         <div class="row">
             <div class="col-12 text-center">
-                <h2 class="text-white py-2">Create Product</h2>
+                <h2 class="text-white py-2">@(Model.Product!.Id == 0 ? "Create Product" : "Edit Product")</h2>
             </div>
         </div>
     </div>
 
     <div class="card-body p-4">
-        <form method="post" class="row">
+        <form method="post" class="row" enctype="multipart/form-data">
+            <input asp-for="Product!.Id" hidden />
             <div class="border p-3">
                 <div class="form-floating py-2 col-12">
                     <input id="errorSpan" asp-for="Product!.Title" class="form-control border-0 shadow" />
@@ -72,14 +73,20 @@
                 </div>
 
                 <div class="form-floating py-2 my-2 col-12">
-                    <input id="errorSpan" asp-for="Product!.ImageUrl" class="form-control border-0 shadow" />
+                    <input id="errorSpan" type="file" class="form-control border-0 shadow" />
                     <label asp-for="Product!.ImageUrl"></label>
-                    <span asp-validation-for="Product!.ImageUrl" class="text-danger"></span>
                 </div>
 
                 <div class="row mt-3">
                     <div class="col-6 col-md-3">
-                        <button type="submit" class="btn btn-primary form-control">Create</button>
+                        @if (Model.Product.Id == 0)
+                        {
+                            <button type="submit" class="btn btn-primary form-control">Create</button>
+                        }
+                        else
+                        {
+                            <button type="submit" class="btn btn-primary form-control">Update</button>
+                        }
                     </div>
                     <div class="col-6 col-md-3">
                         <a asp-area="Admin" asp-controller="Product" asp-action="Index" class="btn btn-outline-secondary form-control">Cancel</a>

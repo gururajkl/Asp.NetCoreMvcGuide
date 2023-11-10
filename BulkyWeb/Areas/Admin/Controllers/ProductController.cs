@@ -22,8 +22,7 @@ namespace BulkyWeb.Areas.Admin.Controllers
             return View(products);
         }
 
-        [HttpGet]
-        public IActionResult Create()
+        public IActionResult Upsert(int? Id)
         {
             IEnumerable<SelectListItem> categoryList = unitOfWork.Category.GetAll().Select(c => new SelectListItem
             {
@@ -37,11 +36,19 @@ namespace BulkyWeb.Areas.Admin.Controllers
                 CategoryList = categoryList
             };
 
-            return View(productViewModel);
+            if (Id == null)
+            {
+                return View(productViewModel);
+            }
+            else
+            {
+                productViewModel.Product = unitOfWork.Product.Get(p => p.Id == Id);
+                return View(productViewModel);
+            }
         }
 
         [HttpPost]
-        public IActionResult Create(ProductViewModel productViewModel)
+        public IActionResult Upsert(ProductViewModel productViewModel, IFormFile? file)
         {
             if (ModelState.IsValid)
             {
@@ -60,36 +67,6 @@ namespace BulkyWeb.Areas.Admin.Controllers
 
                 return View(productViewModel);
             }
-        }
-
-        public IActionResult Edit(int? Id)
-        {
-            if (Id == null)
-            {
-                return NotFound();
-            }
-            else
-            {
-                Product productFromDb = unitOfWork.Product.Get(p => p.Id == Id);
-                if (productFromDb == null)
-                {
-                    return NotFound();
-                }
-                return View(productFromDb);
-            }
-        }
-
-        [HttpPost]
-        public IActionResult Edit(Product product)
-        {
-            if (ModelState.IsValid)
-            {
-                unitOfWork.Product.Update(product);
-                unitOfWork.Save();
-                TempData["Success"] = "Product updated successfully";
-                return RedirectToAction("Index", "Product");
-            }
-            return View();
         }
 
         public IActionResult Delete(int? Id)

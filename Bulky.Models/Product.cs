@@ -31,11 +31,12 @@ namespace Bulky.Models
         [Range(1, 1000)]
         public double Price100 { get; set; }
         // Adding foreign key of Category to this Product.
-        [Display(Name = "Category ID")]
+        [Display(Name = "Category")]
         public int CategoryId { get; set; }
         [ForeignKey("CategoryId")]
         public Category? Category { get; set; }
         [Required]
+        [Display(Name = "Image File")]
         public string? ImageUrl { get; set; }
     }
 }
