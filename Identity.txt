@@ -1,0 +1,26 @@
+* To start with Identity - Click on Add and click on New Scaffolded Item and Select Idenity.
+
+* Then The DbContext class should implement 'IdentityDbContext' instead of 'DbContext'
+
+* By making sure the above step, then we can select the DbContext class from the drop down.
+
+* Select the required files to add/override.
+
+* After adding all the files, ASP.Net will create a new Identity folder with razor syntax.
+
+(Make sure all the Nuget packages are in the same version - if you get error).
+
+* To add the IdentityRole in the application change the DefaultIdentity to Identity and include IdentityRole.
+
+* You can see all the register and login etc,.
+
+* Since this uses Razor pages make sure these lines are there in the program.cs
+// Support of razor pages
+builder.Services.AddRazorPages();
+app.MapRazorPages();
+
+* I have addedd all the logic to create a custom roles in Register page.
+
+* If it is necessary to create the user with custom field including identity user checkout ApplicationUser.cs in Model project.
+
+* If some URL is redirecting properly after the Authorization in the app, checkout 'Configure app cookie' in program.cs

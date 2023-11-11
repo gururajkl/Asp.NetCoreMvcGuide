@@ -7,6 +7,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Notes", "Notes", "{4D69C736
 	ProjectSection(SolutionItems) = preProject
 		Dependency Injection.txt = Dependency Injection.txt
 		DotNet Roadmap.txt = DotNet Roadmap.txt
+		Identity.txt = Identity.txt
 		C:\Users\gjset\Downloads\course_9\.NET 8 NEW Course\Information.pptx = C:\Users\gjset\Downloads\course_9\.NET 8 NEW Course\Information.pptx
 	EndProjectSection
 EndProject
@@ -14,13 +15,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BulkyWeb", "BulkyWeb\BulkyW
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BulkyWebRazor", "BulkyWebRazor\BulkyWebRazor.csproj", "{0DB7D076-CD8F-43FE-B0D8-C2150A77E64B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bulky.Models", "Bulky.Models\Bulky.Models.csproj", "{03229F39-DC07-480F-A429-6E91E37120A8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bulky.Models", "Bulky.Models\Bulky.Models.csproj", "{03229F39-DC07-480F-A429-6E91E37120A8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bulky.DataAccess", "Bulky.DataAccess\Bulky.DataAccess.csproj", "{62408098-9FEC-4D2C-B298-ECE5F7330CA7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bulky.DataAccess", "Bulky.DataAccess\Bulky.DataAccess.csproj", "{62408098-9FEC-4D2C-B298-ECE5F7330CA7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bulky.Utility", "Bulky.Utility\Bulky.Utility.csproj", "{27F82DD2-70DE-44EA-8495-BEBC29A08817}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bulky.Utility", "Bulky.Utility\Bulky.Utility.csproj", "{27F82DD2-70DE-44EA-8495-BEBC29A08817}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DIServiceLifetime", "DIServiceLifetime\DIServiceLifetime.csproj", "{AA3558AE-7E0F-46E3-A1BA-55EAB3F6A5AB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DIServiceLifetime", "DIServiceLifetime\DIServiceLifetime.csproj", "{AA3558AE-7E0F-46E3-A1BA-55EAB3F6A5AB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
