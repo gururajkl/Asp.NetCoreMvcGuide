@@ -24,7 +24,7 @@ namespace BulkyWeb.Areas.Admin.Controllers
 
         public IActionResult Index()
         {
-            List<Product> products = unitOfWork.Product.GetAll("Category").ToList();
+            List<Product> products = unitOfWork.Product.GetAll(includeProperties: "Category").ToList();
             return View(products);
         }
 
@@ -112,7 +112,7 @@ namespace BulkyWeb.Areas.Admin.Controllers
          */
         public IActionResult GetAll()
         {
-            List<Product> productList = unitOfWork.Product.GetAll("Category").ToList();
+            List<Product> productList = unitOfWork.Product.GetAll(includeProperties: "Category").ToList();
             return Json(new { data = productList });
         }
 
