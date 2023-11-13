@@ -4,6 +4,8 @@ using Bulky.Models.ViewModels;
 using Bulky.Utility;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Stripe;
+using Stripe.Checkout;
 using System.Security.Claims;
 
 namespace BulkyWeb.Areas.Admin.Controllers
@@ -99,6 +101,100 @@ namespace BulkyWeb.Areas.Admin.Controllers
             TempData["Success"] = "Order Shipped Successfully.";
 
             return RedirectToAction(nameof(Details), new { orderId = OrderViewModel.OrderHeader.Id });
+        }
+
+        [Authorize(Roles = StaticDetails.Role_Admin + "," + StaticDetails.Role_Employee)]
+        [HttpPost]
+        public IActionResult CancelOrder()
+        {
+            var orderHeader = unitOfWork.OrderHeader.Get(o => o.Id == OrderViewModel!.OrderHeader!.Id);
+
+            if (orderHeader.PaymentStatus == StaticDetails.PaymentStatusApproved)
+            {
+                var options = new RefundCreateOptions()
+                {
+                    Reason = RefundReasons.RequestedByCustomer,
+                    PaymentIntent = orderHeader.PaymentIntentId
+                };
+
+                var service = new RefundService();
+                Refund refund = service.Create(options);
+
+                unitOfWork.OrderHeader.UpdateStatus(orderHeader.Id, StaticDetails.StatusCancelled, StaticDetails.StatusRefunded);
+            }
+            else
+            {
+                unitOfWork.OrderHeader.UpdateStatus(orderHeader.Id, StaticDetails.StatusCancelled, StaticDetails.StatusCancelled);
+            }
+
+            unitOfWork.Save();
+
+            TempData["Success"] = "Order Cancelled Successfully.";
+
+            return RedirectToAction(nameof(Details), new { orderId = OrderViewModel!.OrderHeader!.Id });
+        }
+
+        [HttpPost]
+        [ActionName("Details")]
+        public IActionResult DetailsPayNow()
+        {
+            OrderViewModel!.OrderHeader = unitOfWork.OrderHeader.Get(u => u.Id == OrderViewModel!.OrderHeader!.Id, includeProperties: "ApplicationUser");
+            OrderViewModel.OrderDetail = unitOfWork.OrderDetail.GetAll(u => u.OrderIdHeaderId == OrderViewModel.OrderHeader.Id, includeProperties: "Product");
+
+            var domain = "https://localhost:7169/";
+            var options = new SessionCreateOptions
+            {
+                SuccessUrl = domain + $"Admin/Order/PaymentConfirmation?orderHeaderId={OrderViewModel.OrderHeader.Id}",
+                CancelUrl = domain + $"Admin/Order/Details?orderId={OrderViewModel.OrderHeader.Id}",
+                LineItems = new List<SessionLineItemOptions>(),
+                Mode = "payment",
+            };
+
+            foreach (var item in OrderViewModel.OrderDetail)
+            {
+                var sessionLineItem = new SessionLineItemOptions
+                {
+                    PriceData = new SessionLineItemPriceDataOptions
+                    {
+                        UnitAmount = (long)(item.Price * 100),
+                        Currency = "INR",
+                        ProductData = new SessionLineItemPriceDataProductDataOptions
+                        {
+                            Name = item.Product.Title
+                        }
+                    },
+                    Quantity = item.Count
+                };
+                options.LineItems.Add(sessionLineItem);
+            }
+
+            var service = new SessionService();
+            Session session = service.Create(options);
+
+            unitOfWork.OrderHeader.UpdateStripePaymentID(OrderViewModel.OrderHeader.Id, session.Id, session.PaymentIntentId);
+            unitOfWork.Save();
+            Response.Headers.Add("Location", session.Url);
+            return new StatusCodeResult(303);
+        }
+
+        public IActionResult PaymentConfirmation(int orderHeaderId)
+        {
+            OrderHeader orderHeader = unitOfWork.OrderHeader.Get(u => u.Id == orderHeaderId, includeProperties: "ApplicationUser");
+            if (orderHeader.PaymentStatus == StaticDetails.PaymentStatusDelayedPayment)
+            {
+                // There is an order by company.
+                var service = new SessionService();
+                Session session = service.Get(orderHeader.SessionId);
+
+                if (session.PaymentStatus.ToLower() == "paid")
+                {
+                    unitOfWork.OrderHeader.UpdateStripePaymentID(orderHeaderId, session.Id, session.PaymentIntentId);
+                    unitOfWork.OrderHeader.UpdateStatus(orderHeaderId, orderHeader.OrderStatus!, StaticDetails.PaymentStatusApproved);
+                    unitOfWork.Save();
+                }
+            }
+
+            return View(orderHeaderId);
         }
 
         #region API CALLS
