@@ -177,6 +177,7 @@ namespace BulkyWeb.Areas.Customer.Controllers
                     unitOfWork.OrderHeader.UpdateStatus(id, StaticDetails.StatusApproved, StaticDetails.PaymentStatusApproved);
                     unitOfWork.Save();
                 }
+                HttpContext.Session.Clear();
             }
 
             // Empty the cart list once payment is done.
@@ -198,10 +199,11 @@ namespace BulkyWeb.Areas.Customer.Controllers
 
         public IActionResult Minus(int cartId)
         {
-            var cartFromDb = unitOfWork.ShoppingCart.Get(s => s.Id == cartId);
+            var cartFromDb = unitOfWork.ShoppingCart.Get(s => s.Id == cartId, tracked: true);
             if (cartFromDb.Count <= 1)
             {
                 unitOfWork.ShoppingCart.Remove(cartFromDb);
+                HttpContext.Session.SetInt32(StaticDetails.SessionCart, unitOfWork.ShoppingCart.GetAll(u => u.ApplicationUserId == cartFromDb.ApplicationUserId).Count() - 1);
             }
             else
             {
@@ -214,7 +216,8 @@ namespace BulkyWeb.Areas.Customer.Controllers
 
         public IActionResult Delete(int cartId)
         {
-            var cartFromDb = unitOfWork.ShoppingCart.Get(s => s.Id == cartId);
+            var cartFromDb = unitOfWork.ShoppingCart.Get(s => s.Id == cartId, tracked: true);
+            HttpContext.Session.SetInt32(StaticDetails.SessionCart, unitOfWork.ShoppingCart.GetAll(u => u.ApplicationUserId == cartFromDb.ApplicationUserId).Count() - 1);
             unitOfWork.ShoppingCart.Remove(cartFromDb);
             unitOfWork.Save();
             return RedirectToAction(nameof(Index));
