@@ -182,8 +182,15 @@ namespace BulkyWeb.Areas.Customer.Controllers
                 HttpContext.Session.Clear();
             }
 
-            emailSender.SendEmailAsync(orderHeader.ApplicationUser.Email!, "New Order - Bulky Book",
-                $"<p>New Order Created - {orderHeader.Id}</p>");
+            try
+            {
+                emailSender.SendEmailAsync(orderHeader.ApplicationUser.Email!, "New Order - Bulky Book",
+                    $"<p>New Order Created - {orderHeader.Id}</p>");
+            }
+            catch (Exception)
+            {
+                TempData["Error"] = "Unable to send email!";
+            }
 
             // Empty the cart list once payment is done.
             List<ShoppingCart> shoppingCart = unitOfWork.ShoppingCart.GetAll(u => u.ApplicationUserId == orderHeader.ApplicationUserId).ToList();
