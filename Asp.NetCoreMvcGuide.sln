@@ -23,6 +23,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bulky.Utility", "Bulky.Util
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DIServiceLifetime", "DIServiceLifetime\DIServiceLifetime.csproj", "{AA3558AE-7E0F-46E3-A1BA-55EAB3F6A5AB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmailSender", "EmailSender\EmailSender.csproj", "{0654B9D2-39EE-4EF9-BE37-320EFDE37913}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,6 +55,10 @@ Global
 		{AA3558AE-7E0F-46E3-A1BA-55EAB3F6A5AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AA3558AE-7E0F-46E3-A1BA-55EAB3F6A5AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AA3558AE-7E0F-46E3-A1BA-55EAB3F6A5AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0654B9D2-39EE-4EF9-BE37-320EFDE37913}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0654B9D2-39EE-4EF9-BE37-320EFDE37913}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0654B9D2-39EE-4EF9-BE37-320EFDE37913}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0654B9D2-39EE-4EF9-BE37-320EFDE37913}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -4,7 +4,6 @@ using Bulky.DataAccess.Repository;
 using Bulky.DataAccess.Repository.IRepository;
 using Bulky.Utility;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using Stripe;
 

@@ -2,22 +2,20 @@
 using System.Net.Mail;
 using System.Text;
 
-namespace Bulky.Utility
+namespace EmailSender
 {
-    public class EmailSender : IEmailSender
+    internal class Program
     {
-        // SendGridSecret = _config.GetValue<string>("SendGrid:SecretKey")!;
-
-        public void SendEmailAsync(string email, string subject, string htmlMessage)
+        static void Main(string[] args)
         {
-
             var from = "emailertodotnet@gmail.com";
-            var to = email;
+            var to = "gjsetty@gmail.com";
 
             MailMessage mailMessage = new MailMessage(from, to);
 
-            mailMessage.Body = htmlMessage;
-            mailMessage.Subject = subject;
+            string mailBody = "<h1>Just to check</h1><p>Hey there</p>";
+            mailMessage.Subject = "Checking";
+            mailMessage.Body = mailBody;
             mailMessage.IsBodyHtml = true;
             mailMessage.BodyEncoding = Encoding.UTF8;
 
@@ -29,10 +27,12 @@ namespace Bulky.Utility
 
             try
             {
-                smtpClient.SendAsync(mailMessage, null);
+                smtpClient.Send(mailMessage);
+                Console.WriteLine("Mail send successfully");
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Console.WriteLine(ex.Message);
                 throw;
             }
         }
